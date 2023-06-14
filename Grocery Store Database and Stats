@@ -1,0 +1,23 @@
+--Create a grocery store database
+
+CREATE TABLE candy (id INTEGER PRIMARY KEY, name TEXT, rating INTEGER, aisle INTEGER, price INTEGER);
+ 
+ INSERT INTO candy VALUES (1, 'Skittles', 4, 2, 2);
+ INSERT INTO candy VALUES (2, 'Twix', 2, 4, 3);
+ INSERT INTO candy VALUES (3, 'Snickers',5,3,4);
+ INSERT INTO candy VALUES (4, 'Kitkat', 1,5,1);
+ INSERT INTO candy VALUES (5, 'M&M', 3,7,5);
+ INSERT INTO candy VALUES (6, 'Hershey', 4,6,6);
+ INSERT INTO candy VALUES (7, 'Babe Ruth', 4,8,3);
+ INSERT INTO candy VALUES (8, 'Gummy Bears', 3,2,2);
+INSERT INTO candy VALUES (9, 'Sour Worms', 1,3,4);
+INSERT INTO candy VALUES (10, 'Butterfinger', 5,7,4);
+INSERT INTO candy VALUES (11, 'Reese', 4,1,1);
+INSERT INTO candy VALUES (12, 'Extra', 2,7,3);
+INSERT INTO candy VALUES (13, 'Nerds', 5,8,4);
+INSERT INTO candy VALUES (14, 'Milky Way', 2,2,1);
+INSERT INTO candy VALUES (15, 'Payday',5,8,5);
+
+--display the database ordered by price.
+SELECT * FROM candy
+ORDER BY price;
