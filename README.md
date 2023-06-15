@@ -1,6 +1,6 @@
 #  Santanna Auguste's SQL Portfolio
 
-## Welcome to my SQL Portfolio! This code repository contains examples of SQL I've written. Feel free to take a look and reach out via email if you have any questions: info@breakintotech.academy
+## Welcome to my SQL Portfolio! This code repository contains examples of SQL I've written. Feel free to take a look and reach out via email if you have any questions: santanna.augsute1996@gmail.com
 
 
 
