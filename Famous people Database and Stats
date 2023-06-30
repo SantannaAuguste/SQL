@@ -1,0 +1,38 @@
+I used SQL to create a database showing famous people.
+
+CREATE TABLE people(id INTEGER PRIMARY KEY, first_name TEXT, last_name TEXT, phone TEXT, email TEXT);
+
+INSERT INTO people VALUES (1, 'Michael', 'Jackson', '786910214', 'michaeljackson@yahoo.com');
+INSERT INTO people VALUES (2, 'Nate', 'Robinson', '6016706013', 'naterobinson@yahoo.com');
+INSERT INTO people VALUES (3, 'Beyonce', 'Carter', '6017644757', 'beyonceknowlesCarter@yahoo.com');
+INSERT INTO people VALUES (4, 'Rihanna', 'Robyn', '6019338421', 'rihanna@yahoo.com');
+INSERT INTO people VALUES (5, 'Phillip', 'Auguste', '6019998430', 'phillipauguste@yahoo.com');
+
+
+I used SQL to create a datatbase shwoing the books famous people likes.
+
+CREATE TABLE books(id INTEGER PRIMARY KEY, title TEXT, author TEXT, person_id INTEGER);
+
+INSERT INTO books VALUES (1, 'Drama High', 'L.Divine', 1);
+INSERT INTO books VALUES (2, 'The Big House', 'Mark Stain', 2);
+INSERT INTO books VALUES (3, 'Litlle Red Car', 'Sam Stone', 3);
+INSERT into books VALUES (4, 'Snowy Night', 'Carla Red', 4);
+
+I used SQL to craete a database shwoing the hobbies famous people enjoy.
+
+CREATE TABLE hobbies(id INTEGER PRIMARY KEY, name TEXT, personid INTEGER);
+
+INSERT INTO hobbies VALUES (1, 'Basketball', 1);
+INSERT INTO hobbies VALUES (2, 'hiking', 2);
+INSERT INTO hobbies VALUES (3, 'dancing', 3);
+INSERT INTO hobbies VALUES (4, 'singing', 4);
+INSERT INTO hobbies VALUES (5, 'football', 5);
+
+
+I used SQL to aggregate data using joins to select relevant information from a database. 
+
+SELECT people.first_name, people.last_name, hobbies.name as hobby_name FROM people JOIN hobbies ON people.id= hobbies.personid;
+
+I used SQL to aggregate data using LEFT OUTER joins to select all important information from a database.
+
+SELECT people.email, books.title FROM people LEFT OUTER JOIN books ON people.id= books.person_id;
