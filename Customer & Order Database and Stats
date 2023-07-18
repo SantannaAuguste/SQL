@@ -15,7 +15,7 @@ WHERE orderid= 'iphone'
 AND length(orderID)= 6
 AND orderID <> 'Order ID'
 
-3.SelecT the customer account number for all the orders that were placed in February?
+3.Select the customer account number for all the orders that were placed in February?
 
 SELECT DISTINCT acctnum
 FROM BIT_DB.customers cust
@@ -56,6 +56,14 @@ ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
 AND length(orderid) = 6 
 AND orderid <> 'Order ID'
+
+8.List all the products sold in Los Angeles in February, and include how many of each were sold.
+
+SELECT DISTINCT Product, SUM(quantity)
+FROM BIT_DB.FebSales
+WHERE location
+LIKE '% Los Angeles%"
+GROUP BY product
 
 
 
