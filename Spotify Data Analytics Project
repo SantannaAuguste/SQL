@@ -132,3 +132,17 @@ FROM BIT_DB.Spotifydata
 GROUP BY track_name
 LIMIT 5
 
+12. Create a recommendation when artist song key greater then 5, its above average. If artist song key equal to 5, then average.
+    If artist song key less than 5, then below average. All other song key, no target.
+
+SELECT song_key,
+CASE WHEN song_key> 5 THEN 'Above Average'
+
+WHEN song_key= 5 THEN 'Average'
+WHEN song_key< 5 THEN 'Below Average'
+
+ELSE 'No Target'
+END AS 'Song_key_zone'
+
+FROM BIT_DB.Spotifydata
+
