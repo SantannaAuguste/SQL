@@ -1,0 +1,202 @@
+## Here at some data analytical questions about an online
+   media store called chinook dataset:
+
+1. Show Customers (their full names, customer ID, and country) who are not in the US.
+
+SELECT FirstName, LastName, CustomerId, Country
+FROM chinook1.customers
+WHERE Country<> 'USA'
+
+2. Show only the Customers from France.
+
+SELECT *
+FROM chinook1.customers
+WHERE Country= 'France'
+
+3. Find the Invoices of customers who are from Brazil. The resulting table should show the customer's full name, Invoice ID, Date of the invoice, and billing country.
+
+SELECT cust.FirstName, cust.LastName, inv.InvoiceId, inv.InvoiceDate, inv.BillingCountry
+FROM chinook1.invoices inv
+ 
+LEFT JOIN chinook1.customers cust
+ON inv.CustomerId= cust.CustomerId
+
+WHERE inv.BillingCountry= 'Brazil'
+
+4.Show the Employees who are IT Staff
+
+SELECT *
+FROM chinook1.employees
+WHERE Title= 'IT Staff'
+
+5. Find a unique/distinct list of billing countries from the Invoice table
+
+SELECT DISTINCT BillingCountry
+FROM chinook1. invoices
+
+6. Provide a query that shows the Invoice ID associated with each sales agent. The resulting table should include the Sales Agent's full name
+
+SELECT inv.InvoiceId, emp.FirstName, emp.LastName
+FROM chinook1.invoices inv
+
+JOIN chinook1.customers cust
+ON inv.CustomerId= cust.CustomerId
+
+JOION chinook1.employees emp
+ON emp.EmployeeId= cust.SupportRepId
+
+7. Show the Invoice Total, Customer name, Country, and Sales Agent name for all invoices and customers
+
+SELECT inv.Total, cust.FirstName, cust.LastName, cust.Country, emp.FirstName, emp.LastName
+FROM chinook1.invoices inv
+
+JOIN chinook1.customers cust
+ON inv.CustomerId= cust.CustomerId
+
+JOIN chinook1.employees emp
+ON emp.EmployeeId= cust.SupportRepId
+
+8. How many Invoices were there in 2009?
+
+SELECT COUNT(*)
+FROM chinook1.invoices
+WHERE InvoiceDate
+BETWEEN '2009-01-01'
+AND '2009-12-31'
+
+9. What are the total sales for 2009?
+
+SELECT SUM(Total) AS 'Total Sales'
+FROM chinook1.invoices
+WHERE InvoiceDate
+LIKE '%2009%'
+
+10. Write a query that includes the purchased track name with each invoice line ID.
+
+SELECT t.Name AS 'Track Name', i.InvoiceLineId
+FROM chinook1.tracks t
+
+JOIN chinook1.invoice_items i
+ON t.TrackId= i.TrackId
+
+11.Write a query that includes the purchased track name AND artist name with each invoice line ID.
+
+SELECT t.Name AS 'Track Name', ar.Name AS 'Artist Name', i.InvoiceLineId
+FROM chinook1.tracks t
+
+JOIN chinook1.invoice_items i
+ON t.TrackId= i.TrackId
+
+JOIN chinook1.artists ar
+ON ar.ArtistId= a.ArtistId
+
+JOIN chinook1.albums a
+ON a.AlbumId= t.AlbumId
+
+12. Provide a query that shows all the Tracks, and include the Album name, Media type, and Genre.
+
+SELECT t.Name AS 'Track Name', a.Title AS 'Album Name', m.Name AS 'Media Type', g.Name AS 'Genre'
+FROM chinook1.tracks t
+
+JOIN chinook1.albums a
+ON a.AlbumId= t.AlbumId
+
+JOIN chinook1.media_types m
+ON m.MediaTypeId= t.MediaTypeId
+
+JOIN chinook1.genres g
+ON g.GenreId= t.GenreId
+
+13. List all the customers name and address who lives in France?
+
+SELECT FirstName, LastName, Address, Country
+FROM chinook1.customers
+WHERE Country= 'France'
+
+14. Show the total sales made by each sales agent
+
+SELECT emp.FirstName, emp.LastName, ROUND(SUM(inv.Total)) AS 'Total Sales'
+FROM chinook1.invoices inv
+
+JOIN chinook1.customers cust
+ON inv.CustomerId= cust.CustomerId
+
+JOIN chinook1.employees emp
+On emp.EmployeeId= cust.SupportRepId
+
+WHERE emp.Title= 'Sales Support Agent'
+GROUP BY emp.FirstName
+
+15. Which sales agent made the most dollars in sales in 2009?
+
+SELECT emp.FirstName, emp.LastName, ROUND(SUM(inv.Total)) AS 'Total Sales'
+FROM chinook1.invoices inv
+
+JOIN chinook1.customers cust
+ON inv.CustomerId= cust.CustomerId
+
+JOIN chinook1.employees emp
+ON emp.EmployeeId= cust.SupportRepId
+
+WHERE emp.Title= 'Sales Support Agent'
+AND InvoiceDate
+
+LIKE '%2009%'
+GROUP BY emp.FirstName
+
+ORDER BY  ROUND(SUM(inv.Total)) 
+DESC LIMIT 1
+
+16. List all the track names and album id with each media type name
+
+SELECT t.Name AS 'Track Name', a.AlbumId AS 'Album ID', m.Name AS 'Media Type'
+FROM chinook1.tracks t
+
+JOIN chinook1.albums a
+ON t.AlbumId= a.AlbumId
+
+JOIN chinook1.media_types m
+ON m.MediaTypeId= t.MediaTypeId
+
+17.Select all the tracks with a rock genre
+
+SELECT t.Name AS Tracks, g.Name AS Genre
+FROM chinook1.tracks t
+
+JOIN chinook1.genres g
+ON t.GenreId= g.GenreId
+
+WHERE Genre
+LIKE '%Rock%'
+
+18. List the track name with each artists name
+
+SELECT t.Name AS 'Track Name', ar.Name AS 'Artist Name'
+FROM chinook1.tracks t
+
+JOIN chinook1.albums a
+ON t.AlbumId= a.AlbumId
+
+JOIN chinook1.artists ar
+ON ar.ArtistId= a.ArtistId
+
+19. Select each media type name with each album title
+
+SELECT m.Name AS 'Media Type', a.Title AS 'Album Title'
+FROM chinook1.media_types m
+
+JOIN chinook1.tracks t
+ON m.MediaTypeId= t.MediaTypeId
+
+JOIN chinook1.albums a
+ON a.AlbumId= t.AlbumId
+
+20. List each genre with the track composer
+
+SELECT g.Name AS Genre, t.composer AS 'Track Composer'
+FROM chinook1.genres g
+
+LEFT JOIN chinook1.tracks t
+ON g.GenreId=t.GenreId
+
+WHERE t.composer IS NOT NULL
